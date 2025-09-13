@@ -101,29 +101,6 @@ const markdownReport = reportGenerator.generateFormattedReport(reportData, 'mark
 const textReport = reportGenerator.generateFormattedReport(reportData, 'text');
 ```
 
-## Integration with Piperine
-
-The system is designed to integrate seamlessly with the existing Piperine application:
-
-1. **Data Source**: Uses existing Piperine findings data
-2. **UI Integration**: Adds new menu options for management reports
-3. **Export Integration**: Extends existing export functionality
-4. **Report Generation**: Creates appendices for existing security reports
-
-### Integration Benefits
-
-#### For Security Teams
-- **Automated Management Reports**: Generate executive-ready reports with one click
-- **Mathematical Documentation**: Include detailed formulas and calculations
-- **Compliance Mapping**: Automatically map vulnerabilities to regulatory requirements
-- **Resource Planning**: Get accurate effort estimates for remediation projects
-
-#### For Management
-- **Executive Summaries**: High-level metrics and insights in business terms
-- **Technical Debt Quantification**: Understand the cost of unaddressed vulnerabilities
-- **Compliance Status**: Track regulatory compliance across multiple frameworks
-- **Risk Prioritization**: Data-driven risk matrices for decision making
-
 ## Demo Results
 
 The demo generates comprehensive reports showing:
