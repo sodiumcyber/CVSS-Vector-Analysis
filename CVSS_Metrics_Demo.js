@@ -1,5 +1,7 @@
 /**
- * Campbell Murray - Sodium Cyber Ltd - 2025
+ * Campbell Murray - Sodium Cyber - 2025
+ * DC441905 talk 16/09/2025
+ * 
  * CVSS Management Metrics Demonstration
  * 
  * This script demonstrates how to use CVSS vectors to generate

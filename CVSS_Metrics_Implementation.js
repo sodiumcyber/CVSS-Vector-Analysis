@@ -1,5 +1,7 @@
 /**
- * Campbell Murray - Sodium Cyber Ltd - 2025
+ * Campbell Murray - Sodium Cyber - 2025
+ * DC441905 talk 16/09/2025
+ * 
  * CVSS-Based Management Metrics Implementation
  * 
  * This module provides practical implementations of CVSS-based management metrics
@@ -366,6 +368,189 @@ class CVSSMetricsCalculator {
                 'Data Confidentiality': (cvss) => cvss.VC === 'H',
                 'Data Integrity': (cvss) => cvss.VI === 'H',
                 'System Availability': (cvss) => cvss.VA === 'H'
+            },
+            SOC2: {
+                'CC6.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Logical and Physical Access Controls
+                'CC6.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Prior to Issuance of Credentials
+                'CC6.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Identity and Access Management
+                'CC6.4': (cvss) => cvss.AV === 'N' && cvss.AC === 'L', // Restriction of Access to Information Assets
+                'CC6.5': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Restriction of Access to Information Assets
+                'CC6.6': (cvss) => cvss.VA === 'H', // Restriction of Access to Information Assets
+                'CC6.7': (cvss) => cvss.AC === 'H' && cvss.PR === 'H', // Restriction of Access to Information Assets
+                'CC7.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // System Operations
+                'CC7.2': (cvss) => cvss.VA === 'H', // System Operations
+                'CC7.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Operations
+                'CC7.4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // System Operations
+                'CC7.5': (cvss) => cvss.VA === 'H' // System Operations
+            },
+            GDPR: {
+                'Article 32 - Security of Processing': (cvss) => cvss.VC === 'H' || cvss.VI === 'H' || cvss.VA === 'H',
+                'Article 25 - Data Protection by Design': (cvss) => cvss.AC === 'L' && cvss.AV === 'N',
+                'Article 33 - Breach Notification': (cvss) => cvss.VC === 'H' || cvss.VI === 'H',
+                'Article 35 - Data Protection Impact Assessment': (cvss) => cvss.VC === 'H' || cvss.VI === 'H' || cvss.VA === 'H',
+                'Article 5 - Lawfulness of Processing': (cvss) => cvss.PR === 'N' || cvss.PR === 'L'
+            },
+            NIST: {
+                'PR.AC-1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Identities and Access Management
+                'PR.AC-3': (cvss) => cvss.PR === 'H', // Remote Access Management
+                'PR.AC-4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Access Permissions and Authorizations
+                'PR.AC-5': (cvss) => cvss.AC === 'H' && cvss.PR === 'H', // Network Integrity
+                'PR.AC-6': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Least Privilege Access
+                'PR.AC-7': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // User Access Management
+                'PR.DS-1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data-at-Rest Protection
+                'PR.DS-2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data-in-Transit Protection
+                'PR.DS-3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data-in-Use Protection
+                'PR.DS-4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Adequate Capacity to Ensure Availability
+                'PR.DS-5': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data Loss Prevention
+                'PR.DS-6': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data Loss Prevention
+                'PR.DS-7': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data Loss Prevention
+                'PR.DS-8': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data Loss Prevention
+                'PR.IP-1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Baseline Configurations
+                'PR.IP-2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Baseline Configurations
+                'PR.IP-3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-4': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-5': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-6': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-7': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-8': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-9': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-10': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-11': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.IP-12': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Change Control
+                'PR.MA-1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Maintenance
+                'PR.MA-2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Maintenance
+                'PR.PT-1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Protective Technology
+                'PR.PT-2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Protective Technology
+                'PR.PT-3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Protective Technology
+                'PR.PT-4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Protective Technology
+                'PR.PT-5': (cvss) => cvss.VC === 'H' || cvss.VI === 'H' // Protective Technology
+            },
+            OWASP: {
+                'A01:2021 - Broken Access Control': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control Issues
+                'A02:2021 - Cryptographic Failures': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Data Protection Failures
+                'A03:2021 - Injection': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Injection Vulnerabilities
+                'A04:2021 - Insecure Design': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Design Flaws
+                'A05:2021 - Security Misconfiguration': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Configuration Issues
+                'A06:2021 - Vulnerable Components': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Outdated Components
+                'A07:2021 - Authentication Failures': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Authentication Issues
+                'A08:2021 - Software and Data Integrity': (cvss) => cvss.VI === 'H' || cvss.VA === 'H', // Integrity Failures
+                'A09:2021 - Logging and Monitoring': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Insufficient Logging
+                'A10:2021 - Server-Side Request Forgery': (cvss) => cvss.AC === 'L' && cvss.AV === 'N' // SSRF Vulnerabilities
+            },
+            ISO27001: {
+                'A.5.1.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Information Security Policies
+                'A.5.1.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Information Security Policies
+                'A.6.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Organization of Information Security
+                'A.6.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Organization of Information Security
+                'A.6.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Organization of Information Security
+                'A.6.1.4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Organization of Information Security
+                'A.6.1.5': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Organization of Information Security
+                'A.6.2.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Mobile Devices and Teleworking
+                'A.6.2.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Mobile Devices and Teleworking
+                'A.7.1.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Human Resource Security
+                'A.7.1.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Human Resource Security
+                'A.7.2.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Human Resource Security
+                'A.7.2.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Human Resource Security
+                'A.7.2.3': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Human Resource Security
+                'A.7.3.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Human Resource Security
+                'A.8.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.1.4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.2.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.2.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.2.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.3.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.3.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.8.3.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Asset Management
+                'A.9.1.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.1.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.2.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.2.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.2.3': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.2.4': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.2.5': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.2.6': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.3.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.4.1': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.4.2': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.4.3': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.4.4': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.9.4.5': (cvss) => cvss.PR === 'N' || cvss.PR === 'L', // Access Control
+                'A.10.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Cryptography
+                'A.10.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Cryptography
+                'A.11.1.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.1.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.1.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.1.4': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.1.5': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.1.6': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.4': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.5': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.6': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.7': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.8': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.11.2.9': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Physical and Environmental Security
+                'A.12.1.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.1.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.1.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.1.4': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.2.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.2.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.3.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.4.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.4.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.4.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.4.4': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.5.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.6.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.6.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.12.7.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // Operations Security
+                'A.13.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Communications Security
+                'A.13.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Communications Security
+                'A.13.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Communications Security
+                'A.13.2.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Communications Security
+                'A.13.2.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Communications Security
+                'A.13.2.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Communications Security
+                'A.14.1.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.1.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.1.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.2': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.3': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.4': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.5': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.6': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.7': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.2.8': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.14.3.1': (cvss) => cvss.AC === 'L' && cvss.AV === 'N', // System Acquisition, Development and Maintenance
+                'A.15.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Supplier Relationships
+                'A.15.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Supplier Relationships
+                'A.15.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Supplier Relationships
+                'A.15.2.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Supplier Relationships
+                'A.15.2.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Supplier Relationships
+                'A.16.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.16.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.16.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.16.1.4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.16.1.5': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.16.1.6': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.16.1.7': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Incident Management
+                'A.17.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Aspects of Business Continuity Management
+                'A.17.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Aspects of Business Continuity Management
+                'A.17.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Aspects of Business Continuity Management
+                'A.17.2.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Information Security Aspects of Business Continuity Management
+                'A.18.1.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.1.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.1.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.1.4': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.1.5': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.2.1': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.2.2': (cvss) => cvss.VC === 'H' || cvss.VI === 'H', // Compliance
+                'A.18.2.3': (cvss) => cvss.VC === 'H' || cvss.VI === 'H' // Compliance
             }
         };
         
@@ -390,12 +575,53 @@ class CVSSMetricsCalculator {
 
     getComplianceAction(requirement, framework) {
         const actions = {
+            // PCI DSS
             'Requirement 6.1': 'Implement secure coding practices and regular security testing',
             'Requirement 6.2': 'Apply security patches and updates promptly',
             'Requirement 11.2': 'Conduct regular vulnerability scans and penetration testing',
+            
+            // SOX
             'Financial Data Integrity': 'Implement data integrity controls and monitoring',
             'System Availability': 'Implement high availability and disaster recovery measures',
-            'Access Controls': 'Strengthen authentication and authorization mechanisms'
+            'Access Controls': 'Strengthen authentication and authorization mechanisms',
+            
+            // HIPAA
+            'Data Confidentiality': 'Implement encryption and access controls for protected health information',
+            'Data Integrity': 'Implement data integrity controls and audit logging',
+            'System Availability': 'Implement high availability and disaster recovery measures',
+            
+            // SOC 2
+            'CC6.1': 'Implement logical and physical access controls',
+            'CC6.2': 'Establish identity verification procedures prior to credential issuance',
+            'CC6.3': 'Implement identity and access management controls',
+            'CC6.4': 'Restrict access to information assets based on business need',
+            'CC6.5': 'Restrict access to information assets based on business need',
+            'CC6.6': 'Restrict access to information assets based on business need',
+            'CC6.7': 'Restrict access to information assets based on business need',
+            'CC7.1': 'Implement system operations controls',
+            'CC7.2': 'Implement system operations controls',
+            'CC7.3': 'Implement system operations controls',
+            'CC7.4': 'Implement system operations controls',
+            'CC7.5': 'Implement system operations controls',
+            
+            // GDPR
+            'Article 32 - Security of Processing': 'Implement appropriate technical and organizational measures to ensure security of processing',
+            'Article 25 - Data Protection by Design': 'Implement data protection by design and by default principles',
+            'Article 33 - Breach Notification': 'Implement breach notification procedures and monitoring',
+            'Article 35 - Data Protection Impact Assessment': 'Conduct data protection impact assessments for high-risk processing',
+            'Article 5 - Lawfulness of Processing': 'Ensure lawful basis for processing personal data',
+            
+            // OWASP Top 10 2021
+            'A01:2021 - Broken Access Control': 'Implement proper access controls and enforce the principle of least privilege',
+            'A02:2021 - Cryptographic Failures': 'Implement proper encryption for data at rest and in transit',
+            'A03:2021 - Injection': 'Use parameterized queries and input validation to prevent injection attacks',
+            'A04:2021 - Insecure Design': 'Implement secure design principles and threat modeling',
+            'A05:2021 - Security Misconfiguration': 'Implement secure configuration management and regular security reviews',
+            'A06:2021 - Vulnerable Components': 'Implement component inventory and vulnerability management processes',
+            'A07:2021 - Authentication Failures': 'Implement strong authentication mechanisms and session management',
+            'A08:2021 - Software and Data Integrity': 'Implement integrity controls and secure update mechanisms',
+            'A09:2021 - Logging and Monitoring': 'Implement comprehensive logging and monitoring capabilities',
+            'A10:2021 - Server-Side Request Forgery': 'Implement proper input validation and network segmentation'
         };
         
         return actions[requirement] || 'Review and address compliance requirements';

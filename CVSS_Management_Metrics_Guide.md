@@ -24,7 +24,7 @@ Technical Debt = Σ(Vulnerability Impact × Time Decay × Exploitability Factor 
 
 **Vulnerability Impact (VI)**
 - Derived from CVSS Confidentiality, Integrity, Availability (CIA) metrics
-- Formula: `VI = (VC + VI + VA) / 3` where each component is normalised 0-1
+- Formula: `VI = (VC + VI + VA) / 3` where each component is normalized 0-1
 
 **Time Decay Factor (TDF)**
 - Accounts for increasing exploitability over time
@@ -62,13 +62,13 @@ function calculateTechnicalDebt(vulnerabilities, assetCriticality = 1.0) {
 
 CVSS vectors provide indicators for remediation complexity:
 
-| CVSS Component          | Low Effort   | Medium Effort | High Effort               |
-| ----------------------- | ------------ | ------------- | ------------------------- |
-| **Attack Vector**       | Physical (P) | Local (L)     | Network (N), Adjacent (A) |
-| **Attack Complexity**   | High (H)     | Low (L)       | -                         |
-| **Privileges Required** | High (H)     | Low (L)       | None (N)                  |
-| **User Interaction**    | Active (A)   | Passive (P)   | None (N)                  |
-| **Scope**               | Unchanged    | Changed       | -                         |
+| CVSS Component | Low Effort | Medium Effort | High Effort |
+|----------------|------------|---------------|-------------|
+| **Attack Vector** | Physical (P) | Local (L) | Network (N), Adjacent (A) |
+| **Attack Complexity** | High (H) | Low (L) | - |
+| **Privileges Required** | High (H) | Low (L) | None (N) |
+| **User Interaction** | Active (A) | Passive (P) | None (N) |
+| **Scope** | Unchanged | Changed | - |
 
 ### 2.2 Remediation Effort Formula
 

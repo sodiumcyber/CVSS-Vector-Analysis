@@ -1,5 +1,4 @@
 /**
- * Campbell Murray - Sodium Cyber Ltd - 2025
  * CVSS Management Report Generator Demo
  * 
  * Demonstrates how to generate comprehensive management reports
@@ -12,7 +11,7 @@ const CVSSReportGenerator = require('./CVSS_Report_Generator.js');
 const fs = require('fs');
 const path = require('path');
 
-// Sample vulnerability data
+// Sample vulnerability data (same as before)
 const sampleVulnerabilities = [
     {
         id: 'VULN-001',
@@ -74,8 +73,7 @@ const sampleVulnerabilities = [
  * Demonstrate report generation
  */
 function demonstrateReportGeneration() {
-    console.log('CVSS MANAGEMENT REPORT GENERATOR');
-    console.log('=====================================\n');
+
     
     // Initialize report generator
     const reportGenerator = new CVSSReportGenerator();
@@ -104,18 +102,8 @@ function demonstrateReportGeneration() {
         complianceFrameworks: ['PCI', 'SOX', 'HIPAA']
     });
     
-    console.log('Reports generated successfully\n');
+    console.log('✅ Report generated successfully!\n');
     
-    // Display executive summary
-    console.log('EXECUTIVE SUMMARY');
-    console.log('================');
-    console.log(`Total Findings: ${reportData.executiveSummary.totalFindings}`);
-    console.log(`Critical Findings: ${reportData.executiveSummary.criticalFindings}`);
-    console.log(`Technical Debt: ${reportData.executiveSummary.technicalDebt.toFixed(2)}`);
-    console.log(`Remediation Effort: ${reportData.executiveSummary.remediationEffort.toFixed(1)} person-days`);
-    console.log(`Security Maturity: ${reportData.executiveSummary.securityMaturity}%`);
-    console.log(`Average Risk: ${reportData.executiveSummary.averageRisk.toFixed(1)}/10`);
-    console.log();
     
     // Display key insights
     console.log('KEY INSIGHTS:');
@@ -135,7 +123,7 @@ function demonstrateReportGeneration() {
 }
 
 /**
- * Demonstrate different output formats
+ * Different output formats
  */
 function demonstrateOutputFormats(reportData) {
     console.log('OUTPUT FORMAT DEMONSTRATION');
@@ -147,17 +135,14 @@ function demonstrateOutputFormats(reportData) {
     // Generate HTML report
     console.log('Generating HTML report...');
     const htmlReport = reportGenerator.generateFormattedReport(reportData, 'html');
-    console.log(`HTML report generated (${htmlReport.length} characters)`);
     
     // Generate Markdown report
     console.log('Generating Markdown report...');
     const markdownReport = reportGenerator.generateFormattedReport(reportData, 'markdown');
-    console.log(`Markdown report generated (${markdownReport.length} characters)`);
     
     // Generate Text report
     console.log('Generating Text report...');
     const textReport = reportGenerator.generateFormattedReport(reportData, 'text');
-    console.log(`Text report generated (${textReport.length} characters)`);
     
     return { htmlReport, markdownReport, textReport };
 }
@@ -180,31 +165,22 @@ function saveReportsToFiles(reports) {
     // Save HTML report
     const htmlPath = path.join(outputDir, 'management_report.html');
     fs.writeFileSync(htmlPath, reports.htmlReport);
-    console.log(`HTML report saved to: ${htmlPath}`);
     
     // Save Markdown report
     const markdownPath = path.join(outputDir, 'management_report.md');
     fs.writeFileSync(markdownPath, reports.markdownReport);
-    console.log(`Markdown report saved to: ${markdownPath}`);
     
     // Save Text report
     const textPath = path.join(outputDir, 'management_report.txt');
     fs.writeFileSync(textPath, reports.textReport);
-    console.log(`Text report saved to: ${textPath}`);
-    
-    console.log('\nAll reports saved successfully!');
-    console.log('You can now:');
-    console.log('1. Open the HTML file in a browser for formatted viewing');
-    console.log('2. Use the Markdown file in documentation systems');
-    console.log('3. Copy/paste the Text file into other documents');
-    console.log('4. Include any of these as appendices in security reports');
+
 }
 
 /**
  * Demonstrate report customization
  */
 function demonstrateReportCustomization() {
-    console.log('\nREPORT CUSTOMIZATION DEMONSTRATION');
+    console.log('\nREPORT DEMONSTRATION');
     console.log('==================================\n');
     
     const reportGenerator = new CVSSReportGenerator();
@@ -233,10 +209,6 @@ function demonstrateReportCustomization() {
         complianceFrameworks: ['PCI'] // Only PCI
     });
     
-    console.log('Focused report generated!');
-    console.log(`Technical Debt: ${focusedReport.technicalDebt.totalDebt.toFixed(2)}`);
-    console.log(`Remediation Effort: ${focusedReport.remediationEffort.totalEffort.toFixed(1)} person-days`);
-    console.log();
     
     // Generate executive-only report
     console.log('Generating executive-only report...');
@@ -253,20 +225,14 @@ function demonstrateReportCustomization() {
         complianceFrameworks: []
     });
     
-    console.log('Executive-only report generated!');
-    console.log(`Security Maturity: ${executiveReport.securityPosture.maturityIndex}%`);
-    console.log(`Average Risk: ${executiveReport.securityPosture.averageRisk.toFixed(1)}/10`);
-    console.log();
 }
 
 /**
- * Demonstrate integration with existing Piperine data
+ * Demonstrate integration with existing  data
  */
 function demonstratePiperineIntegration() {
-    console.log('\nPIPERINE INTEGRATION DEMONSTRATION');
-    console.log('==================================\n');
-    
-    // Simulate Piperine findings data structure
+
+    // Simulate findings data structure
     const piperineFindings = sampleVulnerabilities.map(vuln => ({
         id: vuln.id,
         title: vuln.title,
@@ -282,11 +248,10 @@ function demonstratePiperineIntegration() {
         recommendation: `Remediation recommendation for ${vuln.title}`
     }));
     
-    console.log('Simulating Piperine findings data...');
     console.log(`Found ${piperineFindings.length} findings from current report`);
     console.log();
     
-    // Generate management report from Piperine data
+    // Generate management report from data
     const reportGenerator = new CVSSReportGenerator();
     const reportData = reportGenerator.generateManagementReport(piperineFindings, {
         includeTechnicalDebt: true,
@@ -300,24 +265,10 @@ function demonstratePiperineIntegration() {
         teamEfficiency: 1.0,
         complianceFrameworks: ['PCI', 'SOX', 'HIPAA']
     });
-    
-    console.log('Management report generated from Piperine data!');
-    console.log();
-    
-    // Show how this would integrate into Piperine's report generation
-    console.log('INTEGRATION BENEFITS:');
-    console.log('1. Automatic generation of management appendices');
-    console.log('2. Copy/paste ready content for executive summaries');
-    console.log('3. Mathematical formulas for technical documentation');
-    console.log('4. Multiple output formats (HTML, Markdown, Text)');
-    console.log('5. Customizable report sections based on audience');
-    console.log('6. Compliance mapping for regulatory requirements');
-    console.log('7. Resource planning data for project management');
-    console.log();
-}
+    }
 
 /**
- * Run all demonstrations
+ * Run all
  */
 function runAllDemonstrations() {
     try {
@@ -336,14 +287,15 @@ function runAllDemonstrations() {
         // Demonstrate Piperine integration
         demonstratePiperineIntegration();
         
-        console.log('\nALL DEMONSTRATIONS COMPLETED SUCCESSFULLY!');    
+        console.log('\nALL ELEMENTS GENERATED SUCCESSFULLY!');
+        
     } catch (error) {
-        console.error('Error during demonstration:', error.message);
+        console.error('Error during generation:', error.message);
         console.error(error.stack);
     }
 }
 
-// Run demonstrations if this script is executed directly
+// Run if this script is executed directly
 if (require.main === module) {
     runAllDemonstrations();
 }

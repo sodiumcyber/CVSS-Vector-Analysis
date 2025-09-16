@@ -1,5 +1,7 @@
 /**
- * Campbell Murray - Sodium Cyber Ltd - 2025
+ * Campbell Murray - Sodium Cyber - 2025
+ * DC441905 talk 16/09/2025
+ * 
  * CVSS Management Metrics Report Generator
  * 
  * Generates comprehensive management reports and appendices with CVSS-based
@@ -62,7 +64,7 @@ class CVSSReportGenerator {
             includeExecutiveSummary: true,
             assetCriticality: 2.0,
             teamEfficiency: 1.0,
-            complianceFrameworks: ['PCI', 'SOX', 'HIPAA'],
+            complianceFrameworks: ['PCI', 'SOX', 'HIPAA', 'SOC2', 'GDPR', 'NIST', 'ISO27001', 'OWASP'],
             ...options
         };
 
